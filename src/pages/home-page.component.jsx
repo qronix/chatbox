@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ChatBubble from '../components/chat-bubble/chat-bubble.component';
+import ChatBoxContainer from '../components/chat-box-container/chat-box.container';
 
 import './home-page.styles.scss';
 
@@ -20,7 +20,7 @@ const HomePage = ()=> (
             OUR MISSION STATEMENT OUR MISSION STATEMENT
             OUR MISSION STATEMENT OUR MISSION STATEMENT
         </p>
-        <ChatBubble/>
+        <ChatBoxContainer/>
     </div>
 );
 
