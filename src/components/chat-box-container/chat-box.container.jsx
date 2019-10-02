@@ -21,7 +21,15 @@ const ChatBoxContainer = ()=> {
     return(
         <div className={`${(isVisible ? "visible-chat" : null)} chat-box-container`}>
             { (!isVisible) ? <ChatBubble handleClick={handleBubbleClick}/> : null}
-            { (isVisible) ? <ChatBoxHeader handleCloseWindow={handleCloseWindow}/> : null}
+            { 
+                (isVisible) ? 
+                    <div className="chat-box-content">
+                        <ChatBoxHeader handleCloseWindow={handleCloseWindow}/>
+                        <ChatStartForm/>
+                    </div>
+                : 
+                    null
+            }
         </div>
     )
 }
