@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
 import { Button } from '@material-ui/core';
 
 const styles = makeStyles(theme=>({
@@ -13,7 +14,6 @@ const styles = makeStyles(theme=>({
         width:180
     },
     textField:{
-        // margin: theme.spacing(1),
         minWidth:0,
         width:"70%"
     },
@@ -39,10 +39,13 @@ const styles = makeStyles(theme=>({
 
 const ChatStartForm = ()=> {
     const classes = styles();
-
     const [values, setValues] = useState({
         topic:'',
         name:''
+    });
+    const [validFields, setValidFields] = useState({
+        topic:false,
+        name:false
     });
 
     const handleChange = evt => {
@@ -52,9 +55,24 @@ const ChatStartForm = ()=> {
             [evt.target.name]: evt.target.value
         }));
     }
+
+    const validateForm = ()=>{
+        let fields = {};
+        for(let value in values){
+            fields[value] = (values[value]==='');
+        }
+        if(values.name.length<2) fields.name = true;
+        setValidFields((oldValues)=>{
+            return {...oldValues, ...fields};
+        });
+    }
+
     return(
         <form autoComplete="off">
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.formControl} error={validFields.topic}>
+                <InputLabel htmlFor="topic-select">
+                    Select a help topic
+                </InputLabel>
                 <Select
                     className={classes.select}
                     value={values.topic}
@@ -63,6 +81,7 @@ const ChatStartForm = ()=> {
                         name: 'topic',
                         id: 'topic-select'
                     }}
+                    label="Select an issue"
                 >
                     <MenuItem value="account">Account Issues</MenuItem>
                     <MenuItem value="billing">Payment Issues</MenuItem>
@@ -81,10 +100,10 @@ const ChatStartForm = ()=> {
                     onChange={handleChange}
                     margin="normal"
                     label="Enter your name"
+                    error={validFields.name}
                 />
-                <Button variant="contained" color="primary" className={classes.button}>Start Chat</Button>
+                <Button variant="contained" color="primary" className={classes.button} onClick={validateForm}>Start Chat</Button>
             </Container>
-           
         </form>
     );
 }
