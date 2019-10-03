@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -37,7 +37,7 @@ const styles = makeStyles(theme=>({
     }
 }));
 
-const ChatStartForm = ()=> {
+const ChatStartForm = ({startChat})=> {
     const classes = styles();
     const [values, setValues] = useState({
         topic:'',
@@ -47,6 +47,15 @@ const ChatStartForm = ()=> {
         topic:false,
         name:false
     });
+    const [submittedForm, setSubmittedForm] = useState(false);
+
+    useEffect(()=>{
+        if(submittedForm){
+            //Check for no errors in any form values
+            const allFieldsAre = Object.keys(validFields).every(value=>validFields[value]===false);
+            if(allFieldsAre === true) startChat();
+        }
+    },[validFields, submittedForm, startChat]);
 
     const handleChange = evt => {
         evt.persist();
@@ -65,6 +74,7 @@ const ChatStartForm = ()=> {
         setValidFields((oldValues)=>{
             return {...oldValues, ...fields};
         });
+        if(!submittedForm) setSubmittedForm(true);
     }
 
     return(
