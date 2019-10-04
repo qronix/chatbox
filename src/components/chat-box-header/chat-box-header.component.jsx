@@ -33,13 +33,14 @@ const useStyles = makeStyles(theme=>({
     }
 }));
 
-const ChatBoxHeader = ({handleCloseWindow})=> {
+const ChatBoxHeader = ({handleCloseWindow, headerMessage})=> {
     const classes = useStyles();
 
     return(
         <Grid container className={classes.grid}>
             <Grid container item xs={10}>
-                <p className={classes.p}>How can we help?</p>
+                {/* custom header content component necessary? */}
+                <p className={classes.p}>{headerMessage}</p>
             </Grid>
             <Grid container item xs={2}>
                 <Button 
