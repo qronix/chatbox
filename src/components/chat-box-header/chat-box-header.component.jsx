@@ -20,8 +20,18 @@ const useStyles = makeStyles(theme=>({
     },
     grid:{
         // border: "1px solid black",
-        backgroundColor:"rgba(102, 102, 102, 0.87)",
-        color: "white"
+        backgroundColor:"rgba(102, 102, 102, 1)",
+        color: "white",
+        // position: "fixed",
+        zIndex:"999",
+        // width:"200px"
+    },
+    gridFixed:{
+        backgroundColor:"rgba(102, 102, 102, 1)",
+        color: "white",
+        position: "fixed",
+        zIndex:"999",
+        width:"200px",
     },
     p:{
         textAlign:"center",
@@ -33,11 +43,11 @@ const useStyles = makeStyles(theme=>({
     }
 }));
 
-const ChatBoxHeader = ({handleCloseWindow, headerMessage})=> {
+const ChatBoxHeader = ({handleCloseWindow, headerMessage, fixed})=> {
     const classes = useStyles();
 
     return(
-        <Grid container className={classes.grid}>
+        <Grid container className={(fixed)?classes.gridFixed:classes.grid}>
             <Grid container item xs={10}>
                 {/* custom header content component necessary? */}
                 <p className={classes.p}>{headerMessage}</p>

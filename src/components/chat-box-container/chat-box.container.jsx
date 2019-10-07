@@ -29,11 +29,15 @@ const ChatBoxContainer = ()=> {
             { (!isVisible) ? <ChatBubble handleClick={handleBubbleClick}/> : null}
             { 
                 (isVisible) ? 
-                    <div className="chat-box-content">
+                    <div className={(isChatting)?"chat-box-content":null}>
                         {(isChatting) ? (
                             <Fragment>
-                                <ChatBoxHeader handleCloseWindow={handleCloseWindow} headerMessage="How can we help?"/>
-                                <ChatBox/>
+                                <Fragment>
+                                    <ChatBoxHeader handleCloseWindow={handleCloseWindow} headerMessage="How can we help?" fixed/>
+                                </Fragment>
+                                <Fragment>
+                                    <ChatBox/>
+                                </Fragment>
                             </Fragment>
                         ) :
                         (

@@ -10,6 +10,11 @@ $height: 300px;
     left: calc(100% - #{$width} - 10px);
 }
 
+.chat-box-content{
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height: calc(#{$height} - 10px);
+}
     
 .visible-chat{
     background-color: rgba(255, 255, 255, 0.93);
