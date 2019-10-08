@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme=>({
         color: "white",
         // position: "fixed",
         zIndex:"999",
-        // width:"200px"
+        // width:"200px",
     },
     gridFixed:{
         backgroundColor:"rgba(102, 102, 102, 1)",

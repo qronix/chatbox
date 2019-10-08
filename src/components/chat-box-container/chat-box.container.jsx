@@ -4,6 +4,7 @@ import ChatBubble from '../chat-bubble/chat-bubble.component';
 import ChatStartForm from '../chat-start-form/chat-start-form.component';
 import ChatBoxHeader from '../chat-box-header/chat-box-header.component';
 import ChatBox from '../chat-box/chat-box.component';
+import ChatBoxInput from '../chat-box-input/chat-box-input.component';
 
 import './chat-box.container.styles.scss';
 
@@ -33,10 +34,13 @@ const ChatBoxContainer = ()=> {
                         {(isChatting) ? (
                             <Fragment>
                                 <Fragment>
-                                    <ChatBoxHeader handleCloseWindow={handleCloseWindow} headerMessage="How can we help?" fixed/>
+                                    <ChatBoxHeader handleCloseWindow={handleCloseWindow} headerMessage="How can we help?"/>
                                 </Fragment>
                                 <Fragment>
                                     <ChatBox/>
+                                </Fragment>
+                                <Fragment>
+                                    <ChatBoxInput/>
                                 </Fragment>
                             </Fragment>
                         ) :

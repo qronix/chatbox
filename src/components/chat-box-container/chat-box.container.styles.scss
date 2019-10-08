@@ -11,9 +11,9 @@ $height: 300px;
 }
 
 .chat-box-content{
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x:hidden;
-    height: calc(#{$height} - 10px);
+    height: calc(#{$height});
 }
     
 .visible-chat{

@@ -11,7 +11,7 @@ const ChatBox = ()=> {
     const [socketInfo, setSocketInfo] = useState({
         endpoint:'http://127.0.0.1:3500'
     });
-    
+
     useEffect(()=>{
         const socket = socketIOClient(socketInfo.endpoint);
         socket.on('connect',()=>console.log('connected'));
@@ -24,6 +24,12 @@ const ChatBox = ()=> {
 
     return(
         <div className="chat-box">
+            <ChatMessage/>
+            <ChatMessage/>
+            <ChatMessage/>
+            <ChatMessage/>
+            <ChatMessage/>
+            <ChatMessage/>
             <ChatMessage/>
         </div>
     );
