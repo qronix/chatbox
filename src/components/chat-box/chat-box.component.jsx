@@ -22,15 +22,12 @@ const ChatBox = ()=> {
         }
     });
 
+    const handleMessage = data=>{
+        
+    }
+
     return(
         <div className="chat-box">
-            <ChatMessage/>
-            <ChatMessage/>
-            <ChatMessage/>
-            <ChatMessage/>
-            <ChatMessage/>
-            <ChatMessage/>
-            <ChatMessage/>
         </div>
     );
 }

@@ -51,7 +51,7 @@ const ChatBoxInput = ()=>{
                 color="primary"
                 className={classes.button}
             >
-                <Fragment className={classes.sendButton}>
+                <Fragment>
                     <FontAwesomeIcon icon={faPaperPlane} className={classes.buttonIcon}/>
                     <span>Send</span>
                 </Fragment>

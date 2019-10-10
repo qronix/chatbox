@@ -1,3 +1,5 @@
+var getUser = require('./utils/userAvatarAPI');
+
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
@@ -10,8 +12,10 @@ http.listen(3500, function(){
     console.log('Listening on *:3500');
 });
 
-io.on('connection', function(socket){
+io.on('connection', async function(socket){
     socket.on('disconnect',()=>console.log('Socket disconnected'));
-    socket.emit('message','How can I help you today?');
+    const {photo, name} = await getUser.getUser();
+    socket.emit('message', {type:"hello", photo, name});
+    // `$user$photo:${photo}$name:${name}`
 });
 
