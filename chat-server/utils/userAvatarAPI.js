@@ -14,8 +14,11 @@ const getUser = async ()=>{
         }
     });
     const {photo, name} = res.data[0];
-    return {photo, name}; 
+    const firstName = getFirstName(name);
+    return {photo, name:firstName}; 
 }
+
+const getFirstName = name => (name.split(' ')[0]);
 
 module.exports = {
     getUser

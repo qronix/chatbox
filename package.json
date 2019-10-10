@@ -17,7 +17,7 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "concurrently \"node ./chat-server/index.js\" \"react-scripts start\"",
+    "start": "concurrently \"nodemon ./chat-server/index.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

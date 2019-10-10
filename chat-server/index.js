@@ -15,7 +15,8 @@ http.listen(3500, function(){
 io.on('connection', async function(socket){
     socket.on('disconnect',()=>console.log('Socket disconnected'));
     const {photo, name} = await getUser.getUser();
-    socket.emit('message', {type:"hello", photo, name});
+    // console.log('Got user as', name);
+    socket.emit('message', {type:"initialize", photo, name});
     // `$user$photo:${photo}$name:${name}`
 });
 
