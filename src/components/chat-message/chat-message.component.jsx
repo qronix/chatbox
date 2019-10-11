@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import getAvatar from '../../utils/userAvatarAPI';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
     avatar:{
@@ -29,24 +30,18 @@ const useStyles = makeStyles({
     }
 });
 
-const ChatMessage = ()=>{
+const ChatMessage = ({messageData, avatar}) => {
 
-    const [userImage, setUserImage] = useState(null);
     const classes = useStyles();
-
-    useEffect(()=>{
-        const getImage = async ()=>{
-            const image = await getAvatar();
-            setUserImage(image);
-            console.log('image is', image);
-        }
-        getImage();
-    },[]);
 
     return(
         <div className={classes.messageContainer}>
-            <Avatar src={userImage} alt="user avatar" className={classes.avatar}/>
-            <span className={classes.message}>Hello Sarah, I understand you are having issues with your subscription. Can you give me your account number?</span>
+            {(avatar!==null) 
+                ? <Avatar src={avatar} alt="user avatar" className={classes.avatar}/> 
+                : <Avatar src={<FontAwesomeIcon icon={faUserCircle} className="chat-bubble-icon"/>} alt="user avatar" className={classes.avatar}/> 
+            
+            }
+            <span className={classes.message}>{messageData.message}</span>
         </div>
     );
 }

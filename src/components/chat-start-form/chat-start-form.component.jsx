@@ -53,9 +53,9 @@ const ChatStartForm = ({startChat})=> {
         if(submittedForm){
             //Check for no errors in any form values
             const allFieldsAre = Object.keys(validFields).every(value=>validFields[value]===false);
-            if(allFieldsAre === true) startChat();
+            if(allFieldsAre === true) startChat(values);
         }
-    },[validFields, submittedForm, startChat]);
+    },[validFields, submittedForm, startChat, values]);
 
     const handleChange = evt => {
         evt.persist();

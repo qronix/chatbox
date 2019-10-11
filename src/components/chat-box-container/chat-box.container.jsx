@@ -20,6 +20,8 @@ const ChatBoxContainer = ()=> {
     });
     const [headerMessage, setHeaderMessage] = useState("How can we help?");
     const [messages, setMessages] = useState([]);
+    const [chatTopic, setChatTopic] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     useEffect(()=>{
         if(agentInfo.name !== null)
@@ -30,21 +32,27 @@ const ChatBoxContainer = ()=> {
         setIsVisible(true);
     }
     const handleCloseWindow = () => {
-        console.log('Resetting!');
         setIsVisible(false);
         setIsChatting(false);
         setAgentInfo({name:null, photo:null});
         setHeaderMessage("How can we help?");
     }
-    const startChat = () => {
+    const startChat = values => {
+        const {topic, name} = values;
+        setChatTopic(topic);
+        setUserName(name);
         setIsChatting(true);
     }
     const handleMessage = data => {
-        console.log('got a message!', data);
         const {type} = data;
         switch(type){
             case "initialize":
                 setAgentInfo({name:data.name, photo:data.photo});
+                break;
+            case "chat":
+                setMessages(prevMessages=>{
+                    return [...prevMessages, data];
+                });
                 break;
             default:
                 return null;
@@ -63,7 +71,7 @@ const ChatBoxContainer = ()=> {
                                     <ChatBoxHeader handleCloseWindow={handleCloseWindow} headerMessage={headerMessage}/>
                                 </Fragment>
                                 <Fragment>
-                                    <ChatBox handleMessage={handleMessage}/>
+                                    <ChatBox handleMessage={handleMessage} userData={{name:userName, topic:chatTopic}} messages={messages} agentInfo={agentInfo}/>
                                 </Fragment>
                                 <Fragment>
                                     <ChatBoxInput/>
