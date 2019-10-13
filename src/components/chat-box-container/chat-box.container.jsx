@@ -44,6 +44,7 @@ const ChatBoxContainer = ()=> {
         setIsChatting(true);
     }
     const handleMessage = data => {
+        console.log('Data :', data);
         const {type} = data;
         switch(type){
             case "initialize":

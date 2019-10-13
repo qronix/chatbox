@@ -13,8 +13,8 @@ http.listen(3500, function(){
 });
 
 const handleMessage = (data, socket) =>{
-    const {type} = data;
     console.log('Got message', data);
+    const {type} = data;
     switch(type){
         case "initialize":
             console.log('Initializing to client!');
@@ -26,11 +26,11 @@ const handleMessage = (data, socket) =>{
 }
 
 io.on('connection', async function(socket){
+    console.log('socket connected!');
     socket.on('disconnect',()=>console.log('Socket disconnected'));
     const {photo, name} = await getUser.getUser();
     // console.log('Got user as', name);
     socket.emit('message', {type:"initialize", photo, name});
-    socket.on('message', (data)=>{handleMessage(data, socket)});
+    socket.on('message', (data)=>console.log('Got a message!',data));
     // `$user$photo:${photo}$name:${name}`
 });
-

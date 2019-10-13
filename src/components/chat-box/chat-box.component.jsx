@@ -12,15 +12,16 @@ const ChatBox = ({handleMessage, userData, messages, agentInfo}) => {
     const [socketInfo, setSocketInfo] = useState({
         endpoint:'http://127.0.0.1:3500'
     });
-
+    const socket = socketIOClient(socketInfo.endpoint);
+    socket.on('message', (data)=>handleMessage(data));
+    socket.on('connect',()=>{
+        socket.emit('message', {type:'initialize', name:'Test', topic:'Testing'});
+    });
     const stuff = (socket)=>{
         socket.emit('message',{type:'initialize', name:'Test', topic:'Testing'});
     }
     useEffect(()=>{
-        console.log('doing shiiiit!');
-        const socket = socketIOClient(socketInfo.endpoint);
-        socket.on('connect', ()=>socket.emit('message','what it do'));
-        socket.on('message', (data)=>handleMessage(data));
+        // socket.emit('message', {type:'initialize', name:'Test', topic:'Testing'});
         return ()=>{
             console.log('Disconnecting!');
             socket.close();
