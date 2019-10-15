@@ -5,6 +5,7 @@ import ChatStartForm from '../chat-start-form/chat-start-form.component';
 import ChatBoxHeader from '../chat-box-header/chat-box-header.component';
 import ChatBox from '../chat-box/chat-box.component';
 import ChatBoxInput from '../chat-box-input/chat-box-input.component';
+import Socket from '../../utils/network';
 
 import './chat-box.container.styles.scss';
 
@@ -22,11 +23,25 @@ const ChatBoxContainer = ()=> {
     const [messages, setMessages] = useState([]);
     const [chatTopic, setChatTopic] = useState(null);
     const [userName, setUserName] = useState(null);
+    const [socket, setSocket] = useState(null);
 
     useEffect(()=>{
+        if(isChatting && socket === null){
+            console.log('Connecting....');
+            const initialData = {
+                type:'initialize',
+                name:userName,
+                topic:chatTopic
+            }
+            const socket = Socket(handleMessage, initialData);
+            setSocket(socket);
+        }
+        if(!isChatting && socket !== null)
+            socket.close();
+
         if(agentInfo.name !== null)
-        setHeaderMessage(`Chatting with ${agentInfo.name}`);
-    },[agentInfo.name]);
+            setHeaderMessage(`Chatting with ${agentInfo.name}`);
+    },[agentInfo.name, isChatting, chatTopic, socket, userName]);
 
     const handleBubbleClick = () => {
         setIsVisible(true);

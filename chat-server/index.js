@@ -28,9 +28,12 @@ const handleMessage = (data, socket) =>{
 io.on('connection', async function(socket){
     console.log('socket connected!');
     socket.on('disconnect',()=>console.log('Socket disconnected'));
-    const {photo, name} = await getUser.getUser();
-    // console.log('Got user as', name);
-    socket.emit('message', {type:"initialize", photo, name});
-    socket.on('message', (data)=>console.log('Got a message!',data));
-    // `$user$photo:${photo}$name:${name}`
+    socket.on('message', (data)=>handleMessage(data,socket));
+    try{
+        const {photo, name} = await getUser.getUser();
+        socket.emit('message', {type:"initialize", photo, name, sender:'agent'});
+    } catch(err){
+        console.log('Could not get avatar');
+        socket.emit('message', {type:"initialize", photo:null, name:"agent", sender:'agent'});
+    }
 });

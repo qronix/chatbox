@@ -33,12 +33,12 @@ const useStyles = makeStyles({
 const ChatMessage = ({messageData, avatar}) => {
 
     const classes = useStyles();
-
+    console.log('Avatar is: ', avatar);
     return(
         <div className={classes.messageContainer}>
             {(avatar!==null) 
                 ? <Avatar src={avatar} alt="user avatar" className={classes.avatar}/> 
-                : <Avatar src={<FontAwesomeIcon icon={faUserCircle} className="chat-bubble-icon"/>} alt="user avatar" className={classes.avatar}/> 
+                : <Avatar src={null} alt="user avatar" className={classes.avatar}><FontAwesomeIcon icon={faUserCircle} className="chat-bubble-icon"/></Avatar> 
             
             }
             <span className={classes.message}>{messageData.message}</span>

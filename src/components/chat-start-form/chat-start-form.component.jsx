@@ -58,10 +58,12 @@ const ChatStartForm = ({startChat})=> {
     },[validFields, submittedForm, startChat, values]);
 
     const handleChange = evt => {
-        evt.persist();
+        // evt.persist();
+        console.log('updating values!');
+        const {value, name} = evt.target;
         setValues(oldValues=>({
             ...oldValues,
-            [evt.target.name]: evt.target.value
+            [name]: value
         }));
     }
 
