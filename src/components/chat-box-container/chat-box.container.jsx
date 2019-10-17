@@ -50,6 +50,10 @@ const ChatBoxContainer = ()=> {
         setIsVisible(false);
         setIsChatting(false);
         setAgentInfo({name:null, photo:null});
+        setUserName(null);
+        setChatTopic(null);
+        setSocket(null);
+        setMessages([]);
         setHeaderMessage("How can we help?");
     }
     const startChat = values => {
