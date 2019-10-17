@@ -36,9 +36,10 @@ const ChatBoxContainer = ()=> {
             const socket = Socket(handleMessage, initialData);
             setSocket(socket);
         }
-        if(!isChatting && socket !== null)
+        if(!isChatting && socket !== null){
             socket.close();
-
+            setSocket(null);
+        }
         if(agentInfo.name !== null)
             setHeaderMessage(`Chatting with ${agentInfo.name}`);
     },[agentInfo.name, isChatting, chatTopic, socket, userName]);
@@ -52,7 +53,6 @@ const ChatBoxContainer = ()=> {
         setAgentInfo({name:null, photo:null});
         setUserName(null);
         setChatTopic(null);
-        setSocket(null);
         setMessages([]);
         setHeaderMessage("How can we help?");
     }
