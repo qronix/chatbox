@@ -1,5 +1,6 @@
 .chat-box{
     overflow-y: auto;
+    overflow-x: hidden;
     height: calc(100% - 84px);
     margin-top: 42px;
     position: relative;

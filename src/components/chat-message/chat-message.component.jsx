@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -22,15 +22,22 @@ const useStyles = makeStyles({
         textAlign:"left",
     },
     message:{
+        width:"180px",
         backgroundColor: "#BCBBBB",
         borderRadius:"5%",
         padding:"5px",
         letterSpacing:"0.1em",
-        background: " linear-gradient(to right, rgba(235,255,138,1) 0%, rgba(182,238,104,1) 100%)",
+        wordBreak:"break-word",
+    },
+    agentMessage:{
+        background: "linear-gradient(to right, rgba(235,255,138,1) 0%, rgba(182,238,104,1) 100%)"
+    },
+    userMessage:{
+        background: "linear-gradient(to right, rgba(41,184,229,1) 0%, rgba(179,220,237,1) 100%);"
     }
 });
 
-const ChatMessage = ({messageData, avatar}) => {
+const ChatMessage = ({messageData:{message,sender}, avatar}) => {
 
     const classes = useStyles();
     console.log('Avatar is: ', avatar);
@@ -39,9 +46,8 @@ const ChatMessage = ({messageData, avatar}) => {
             {(avatar!==null) 
                 ? <Avatar src={avatar} alt="user avatar" className={classes.avatar}/> 
                 : <Avatar src={null} alt="user avatar" className={classes.avatar}><FontAwesomeIcon icon={faUserCircle} className="chat-bubble-icon"/></Avatar> 
-            
             }
-            <span className={classes.message}>{messageData.message}</span>
+            <span className={`${classes.message} ${sender === "agent" ? classes.agentMessage : classes.userMessage}`}>{message}</span>
         </div>
     );
 }
