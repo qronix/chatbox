@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -26,14 +26,35 @@ const styles = makeStyles({
     },
     textField:{
         minHeight:0,
-        // height:"42px"
     }
 });
 
-const ChatBoxInput = ()=>{
+const ChatBoxInput = ({sendMessage})=>{
     const classes = styles();
+
+    const [inputValue, setInputValue] = useState("");
+    const [inputError, setInputError] = useState(false);
+
+    const handleChange = (evt) => {
+        const {value} = evt.target;
+        if(inputError){
+            setInputError(false);
+        }
+        setInputValue(value);
+    }
+    const validateInput = ()=> {
+        console.log('Checking input value:', inputValue.length);
+        if(inputValue.length===0){
+            setInputError(true);
+        }
+        else{
+            sendMessage(inputValue);
+            setInputValue("");
+        }
+    }
+
     return(
-        <form className={classes.chatInputContainer}>
+        <form className={classes.chatInputContainer} onSubmit={(e)=>e.preventDefault()}>
             <TextField 
                 id="user-input"
                 className={classes.textField}
@@ -45,11 +66,15 @@ const ChatBoxInput = ()=>{
                         top:"2px"
                     }
                 }}
+                error={inputError}
+                onChange={handleChange}
+                value={inputValue}
             />
             <Button
                 variant="contained"
                 color="primary"
                 className={classes.button}
+                onClick={validateInput}
             >
                 <Fragment>
                     <FontAwesomeIcon icon={faPaperPlane} className={classes.buttonIcon}/>

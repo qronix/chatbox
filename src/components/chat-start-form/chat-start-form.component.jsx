@@ -80,7 +80,7 @@ const ChatStartForm = ({startChat})=> {
     }
 
     return(
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={(e)=>e.preventDefault()}>
             <FormControl className={classes.formControl} error={validFields.topic}>
                 <InputLabel htmlFor="topic-select">
                     Select a help topic

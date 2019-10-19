@@ -79,6 +79,16 @@ const ChatBoxContainer = ()=> {
         }
     }
 
+    const sendMessage = message => {
+        const messageData = {type:"chat", message};
+        if(message.length !== 0){
+            socket.emit('message', messageData);
+            handleMessage(messageData);
+        }else{
+            console.log('No message provided');
+        }
+    }
+
     return(
         <div className={`${(isVisible ? "visible-chat" : null)} chat-box-container`}>
             { (!isVisible) ? <ChatBubble handleClick={handleBubbleClick}/> : null}
@@ -94,7 +104,7 @@ const ChatBoxContainer = ()=> {
                                     <ChatBox handleMessage={handleMessage} userData={{name:userName, topic:chatTopic}} messages={messages} agentInfo={agentInfo}/>
                                 </Fragment>
                                 <Fragment>
-                                    <ChatBoxInput/>
+                                    <ChatBoxInput sendMessage={sendMessage}/>
                                 </Fragment>
                             </Fragment>
                         ) :

@@ -20,6 +20,9 @@ const handleMessage = (data, socket) =>{
             console.log('Initializing to client!');
             socket.emit('message',{type:'chat', message:`Hello ${data.name}, I understand you need help with ${data.topic}`, sender:'agent'});
             break;
+        case "chat":
+            console.log('Got message', data.message);
+            break;
         default:
             break;
     }
