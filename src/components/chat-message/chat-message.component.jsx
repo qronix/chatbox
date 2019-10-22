@@ -40,7 +40,6 @@ const useStyles = makeStyles({
 const ChatMessage = ({messageData:{message,sender}, avatar}) => {
 
     const classes = useStyles();
-    console.log('Avatar is: ', avatar);
     return(
         <div className={classes.messageContainer}>
             {(avatar!==null) 

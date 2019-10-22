@@ -52,9 +52,12 @@ const ChatBoxInput = ({sendMessage})=>{
             setInputValue("");
         }
     }
-
+    const handleSubmit = evt =>{
+        evt.preventDefault();
+        validateInput();
+    }
     return(
-        <form className={classes.chatInputContainer} onSubmit={(e)=>e.preventDefault()}>
+        <form className={classes.chatInputContainer} onSubmit={(e)=>handleSubmit(e)}>
             <TextField 
                 id="user-input"
                 className={classes.textField}
