@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -8,79 +8,77 @@ import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import { Button } from '@material-ui/core';
 
-const styles = makeStyles(theme=>({
-    formControl:{
+const styles = makeStyles(theme => ({
+    formControl: {
         margin: theme.spacing(1),
-        width:180
+        width: 180
     },
-    textField:{
-        minWidth:0,
-        width:"70%"
-    },
-    container:{
-        display:"flex",
-        justifyContent:"space-between",
-        alignContent:"center",
-        alignItems:"center",
-        width:"100%",
-        margin:0,
-        padding:"5%"
-    },
-    button:{
+    textField: {
         minWidth: 0,
-        width:"20%",
-        height:"50%",
-        fontSize:"0.6em",
-        padding:"4px 20px",
-        postion:"relative",
-        top:10
+        width: "70%"
+    },
+    container: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignContent: "center",
+        alignItems: "center",
+        width: "100%",
+        margin: 0,
+        padding: "5%"
+    },
+    button: {
+        minWidth: 0,
+        width: "20%",
+        height: "50%",
+        fontSize: "0.6em",
+        padding: "4px 20px",
+        postion: "relative",
+        top: 10
     }
 }));
 
-const ChatStartForm = ({startChat})=> {
+const ChatStartForm = ({ startChat }) => {
     const classes = styles();
     const [values, setValues] = useState({
-        topic:'',
-        name:''
+        topic: '',
+        name: ''
     });
     const [validFields, setValidFields] = useState({
-        topic:false,
-        name:false
+        topic: false,
+        name: false
     });
     const [submittedForm, setSubmittedForm] = useState(false);
 
-    useEffect(()=>{
-        if(submittedForm){
+    useEffect(() => {
+        if (submittedForm) {
             //Check for no errors in any form values
-            const allFieldsAre = Object.keys(validFields).every(value=>validFields[value]===false);
-            if(allFieldsAre === true) startChat(values);
+            const allFieldsAre = Object.keys(validFields).every(value => validFields[value] === false);
+            if (allFieldsAre === true) startChat(values);
         }
-    },[validFields, submittedForm, startChat, values]);
+    }, [validFields, submittedForm, startChat, values]);
 
     const handleChange = evt => {
-        // evt.persist();
-        console.log('updating values!');
-        const {value, name} = evt.target;
-        setValues(oldValues=>({
+        const { value, name } = evt.target;
+        setValues(oldValues => ({
             ...oldValues,
             [name]: value
         }));
     }
 
-    const validateForm = ()=>{
+    const validateForm = () => {
         let fields = {};
-        for(let value in values){
-            fields[value] = (values[value]==='');
+        for (let value in values) {
+            fields[value] = (values[value] === '');
         }
-        if(values.name.length<2) fields.name = true;
-        setValidFields((oldValues)=>{
-            return {...oldValues, ...fields};
+        if (values.name.length < 2) fields.name = true;
+        setValidFields((oldValues) => {
+            return { ...oldValues, ...fields };
         });
-        if(!submittedForm) setSubmittedForm(true);
+        if (!submittedForm) setSubmittedForm(true);
     }
 
-    return(
-        <form autoComplete="off" onSubmit={(e)=>e.preventDefault()}>
+    return (
+        <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
             <FormControl className={classes.formControl} error={validFields.topic}>
                 <InputLabel htmlFor="topic-select">
                     Select a help topic
@@ -105,8 +103,8 @@ const ChatStartForm = ({startChat})=> {
                 <TextField
                     className={classes.textField}
                     inputProps={{
-                        name:'name',
-                        id:'chat-input'
+                        name: 'name',
+                        id: 'chat-input'
                     }}
                     value={values.name}
                     onChange={handleChange}

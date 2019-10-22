@@ -1,3 +1,10 @@
+/*
+    Connects to the uifaces api to grab
+    a random user profile. The data is 
+    stripped down to the profile first name 
+    and the user avatar
+*/
+
 const axios = require('axios');
 
 const API_URL = 'https://uifaces.co/api';

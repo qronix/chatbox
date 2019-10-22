@@ -4,7 +4,7 @@ import ChatBoxContainer from '../components/chat-box-container/chat-box.containe
 
 import './home-page.styles.scss';
 
-const HomePage = ()=> (
+const HomePage = () => (
     <div className="home-page">
         <h1>YOUR COMPANY NAME</h1>
         <p>
@@ -20,7 +20,7 @@ const HomePage = ()=> (
             OUR MISSION STATEMENT OUR MISSION STATEMENT
             OUR MISSION STATEMENT OUR MISSION STATEMENT
         </p>
-        <ChatBoxContainer/>
+        <ChatBoxContainer />
     </div>
 );
 
